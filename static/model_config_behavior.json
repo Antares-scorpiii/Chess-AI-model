@@ -1,6 +1,6 @@
 {
   "model_type": "behavioral",
-  "model_path": "models/model.onnx",
-  "quantized_path": "models/model_quantized.onnx",
+  "model_path": "behavioral_model/model.onnx",
+  "quantized_path": "behavioral_model/model_quantized.onnx",
   "encoding": "from_to_64x64"
 }

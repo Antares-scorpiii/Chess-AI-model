@@ -1,31 +1,29 @@
-# --- AI & Model Files ---
-*.pth
-*.ckpt
-*.pb.gz
-*.onnx
-*.bin
-models/
-checkpoints/
-
-*.pgn
-*.csv
-*.jsonl
-*.chunks
-*.trainingdata
-data/
-datasets/
-checkpoints/
-external/
-# --- Python Environment ---
+# Python
 __pycache__/
 *.py[cod]
-*$py.class
-venv/
-env/
-.env
-.venv
-build/
-dist/
+.venv/
+*.egg-info/
 
-# --- Hardware & System ---
-.nv/
+# Data & training artifacts
+data/
+models/
+checkpoints/
+mlruns/
+results/
+scratch/
+notebooks/
+filtered.pgn
+stockfish.tar.gz
+sym_shape_infer_temp.onnx
+bin/
+
+# External deps (cloned separately)
+external/
+
+# ONNX intermediates (not needed for serving)
+static/maia_model/maia_model_prep.onnx
+static/behavioral_model/model_prep.onnx
+
+# Secrets
+.env
+config.yaml

@@ -15,8 +15,8 @@ def set_model(model_type):
             # Create default behavioral config
             config = {
                 "model_type": "behavioral",
-                "model_path": "models/model.onnx",
-                "quantized_path": "models/model_quantized.onnx",
+                "model_path": "behavioral_model/model.onnx",
+                "quantized_path": "behavioral_model/model_quantized.onnx",
                 "encoding": "from_to_64x64"
             }
             config_source.write_text(json.dumps(config, indent=2))

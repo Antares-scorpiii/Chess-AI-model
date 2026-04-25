@@ -14,7 +14,7 @@ def quantize_model(config: dict):
         return
 
     print("Running ONNX pre-processing...")
-    quant_pre_process(input_path, prep_path)
+    quant_pre_process(input_path, prep_path, skip_symbolic_shape=True)
 
     print("Running dynamic quantization...")
     quantize_dynamic(

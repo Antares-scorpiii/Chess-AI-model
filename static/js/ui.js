@@ -120,16 +120,43 @@ window.addEventListener('load', async () => {
     board.init();
     console.log("Board Controller initialized");
 
+    const modelBtns = document.querySelectorAll('.model-btn');
+
+    function updateActiveModelBtn() {
+        const activeConfig = ai.config && ai.config.model_type === 'maia'
+            ? 'model_config_maia.json'
+            : 'model_config_behavior.json';
+        modelBtns.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.config === activeConfig);
+        });
+    }
+
     console.log("Attempting to init AI...");
     statusText.textContent = 'Loading AI model...';
     try {
         await ai.init();
         console.log("AI Init complete");
+        updateActiveModelBtn();
         statusText.textContent = 'Ready. Your turn.';
     } catch (e) {
         statusText.textContent = 'Error loading AI model!';
         console.error("AI Init failed!", e);
     }
+
+    modelBtns.forEach(btn => {
+        btn.addEventListener('click', async () => {
+            if (btn.classList.contains('active')) return;
+            statusText.textContent = 'Switching model...';
+            try {
+                await ai.switchModel(btn.dataset.config);
+                updateActiveModelBtn();
+                statusText.textContent = 'Ready. Your turn.';
+            } catch (e) {
+                statusText.textContent = 'Error loading model!';
+                console.error('Model switch failed:', e);
+            }
+        });
+    });
 
     // Update clocks
     function updateClocks() {

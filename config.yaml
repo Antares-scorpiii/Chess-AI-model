@@ -7,11 +7,11 @@ weight_decay: 0.0005
 lr_scheduler: "cosine"
 lr: 0.0001              
 epochs: 30
-finetune_epochs: 40
+finetune_epochs: 20
 finetune_lr: 0.00001
 finetune_batch_size: 128
 use_value_head: false
-ELO: 1100
+ELO: 1300
 username: "JarJarAmidala"
 pgn_path: "data/games.pgn"
 onnx_output_path: "static/models/model.onnx"

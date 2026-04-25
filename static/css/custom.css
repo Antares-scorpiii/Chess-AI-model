@@ -420,6 +420,33 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
+.model-toggle {
+    display: flex;
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid var(--input-border);
+}
+
+.model-btn {
+    background: var(--action-bg);
+    border: none;
+    color: var(--text-color);
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: background 0.15s;
+}
+
+.model-btn:hover {
+    background: var(--action-hover);
+}
+
+.model-btn.active {
+    background: var(--accent);
+    color: var(--accent-contrast);
+}
+
 /* Coordinate labels (Lichess style) */
 body.coords-in .cg-wrap {
     position: relative;
