@@ -91,3 +91,38 @@ Both models are INT8 quantized (~75% size reduction) for fast browser inference.
 - [Maia Chess](https://github.com/CSSLab/maia-chess) — base model + policy index
 - [Chessground](https://github.com/lichess-org/chessground) — board UI
 - [chess.js](https://github.com/jhlywa/chess.js) — move legality
+
+LinkedIn post:
+
+I built a chess AI that plays like me.
+
+Two models, both trained on my own Lichess game history:
+
+→ A behavioral cloning model that learns my move patterns directly from PGN data
+→ A finetuned Maia model (ELO 1100) that adapts the Lc0-based Maia architecture to my specific playing style
+
+Both run entirely in the browser — no backend, no GPU. The models are INT8 quantized and served via ONNX Runtime Web. You can toggle between them mid-game without reloading.
+
+The full pipeline: download games from Lichess → build dataset → train → evaluate → export to ONNX → quantize → serve.
+
+Built with PyTorch, ONNX Runtime, Chessground, and chess.js.
+
+[link]
+
+MLflow charts — your training metrics are stored in MLflow but only as raw metric logs (no images). To get charts:
+
+
+uv run mlflow ui
+Opens at http://localhost:5000. Go to your run → Charts tab. You can screenshot from there, or click the download icon on any chart to save it as PNG.
+
+Vercel deployment:
+
+The static/ folder is a pure static site. Deploy it directly:
+
+
+npm i -g vercel
+cd static
+vercel
+Vercel will detect it as a static site. Done — no config needed. The ONNX models in static/maia_model/ and static/behavioral_model/ will be served as static assets.
+
+One caveat: maia_model.onnx has a .data sidecar file (external weights). Make sure both maia_model.onnx and maia_model.onnx.data are not in your .gitignore before deploying — only the full (non-quantized) versions are ignored. The quantized files (*_quantized.onnx) are kept and will deploy fine.

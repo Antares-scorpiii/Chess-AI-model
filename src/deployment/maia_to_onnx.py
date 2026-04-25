@@ -39,7 +39,7 @@ def convert_to_onnx(weights_path, output_path):
         input_names=["board"],
         output_names=["policy_logits", "value"],
         dynamic_axes={"board": {0: "batch"}},
-        opset_version=11,
+        opset_version=17,
         dynamo=False
     )
     

@@ -4,11 +4,11 @@ import yaml
 import argparse
 import os
 
-def quantize_model(config: dict):
+def quantize_model(config: dict, op_types=None):
     input_path = config["onnx_output_path"]
     output_path = config["quantized_output_path"]
     prep_path = input_path.replace(".onnx", "_prep.onnx")
-    
+
     if not os.path.exists(input_path):
         print(f"ONNX model not found at {input_path}. Please run 'make export' first.")
         return
@@ -21,6 +21,7 @@ def quantize_model(config: dict):
         model_input=prep_path,
         model_output=output_path,
         weight_type=QuantType.QInt8,
+        op_types_to_quantize=op_types,
         extra_options={'EnableSubgraph': True}
     )
     
@@ -34,14 +35,16 @@ if __name__ == "__main__":
     parser.add_argument("--config", required=True)
     parser.add_argument("--input", help="Optional override for input ONNX path")
     parser.add_argument("--output", help="Optional override for output quantized path")
+    parser.add_argument("--op-types", help="Comma-separated op types to quantize (default: all)")
     args = parser.parse_args()
-    
+
     with open(args.config, "r") as f:
         config = yaml.safe_load(f)
-    
+
     if args.input:
         config["onnx_output_path"] = args.input
     if args.output:
         config["quantized_output_path"] = args.output
-    
-    quantize_model(config)
+
+    op_types = [op.strip() for op in args.op_types.split(",")] if args.op_types else None
+    quantize_model(config, op_types)
