@@ -1,0 +1,31 @@
+# --- AI & Model Files ---
+*.pth
+*.ckpt
+*.pb.gz
+*.onnx
+*.bin
+models/
+checkpoints/
+
+*.pgn
+*.csv
+*.jsonl
+*.chunks
+*.trainingdata
+data/
+datasets/
+checkpoints/
+external/
+# --- Python Environment ---
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+.venv
+build/
+dist/
+
+# --- Hardware & System ---
+.nv/

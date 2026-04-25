@@ -1,0 +1,6 @@
+{
+  "model_type": "maia",
+  "model_path": "maia_model/maia_model.onnx",
+  "quantized_path": "maia_model/maia_model_quantized.onnx",
+  "encoding": "maia_policy_1858"
+}

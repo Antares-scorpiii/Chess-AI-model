@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess • Play Against behavioural model</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/chessground@9.2.1/assets/chessground.base.css">
+    <link rel="stylesheet" href="https://unpkg.com/chessground@9.2.1/assets/chessground.brown.css">
+    <link rel="stylesheet" href="https://unpkg.com/chessground@9.2.1/assets/chessground.cburnett.css">
+
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+
+<body class="brown cburnett coords-in">
+
+    <div class="layout-grid">
+        <div class="left-panel">
+            <div class="settings">
+                    <div class="setting-row">
+                    <label class="checkbox-label"><input type="checkbox" id="show-legal-moves" checked><span>Show legal
+                            moves</span></label>
+                </div>
+                <div class="setting-row">
+                    <label class="checkbox-label"><input type="checkbox" id="play-sounds"
+                            checked><span>Sound</span></label>
+                </div>
+                <div class="setting-row">
+                    <label class="checkbox-label"><input type="checkbox" id="auto-queen" checked><span>Auto-promote to
+                            Queen</span></label>
+                </div>
+                <div class="setting-row">
+                    <label class="checkbox-label"><input type="checkbox" id="theme-toggle"><span>Dark mode</span></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-board">
+            <div class="ruser">
+                <div class="username">AI Bot</div>
+                <div class="rclock clock-wrapper">
+                    <div class="clock" id="clock-black">
+                        <div class="time">10:00</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cg-wrap" id="board-wrapper"></div>
+
+            <div class="ruser">
+                <div class="username">You</div>
+                <div class="rclock clock-wrapper">
+                    <div class="clock running" id="clock-white">
+                        <div class="time">10:00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <div class="rcontrols">
+                <div class="status" id="status-text">Initializing...</div>
+                <div class="time-selector">
+                    <button class="time-button white" data-time="180" data-side="white">3+0 White</button>
+                    <button class="time-button black" data-time="180" data-side="black">3+0 Black</button>
+                    <button class="time-button white" data-time="300" data-side="white">5+0 White</button>
+                    <button class="time-button black" data-time="300" data-side="black">5+0 Black</button>
+                    <button class="time-button white active" data-time="600" data-side="white">10+0 White</button>
+                    <button class="time-button black" data-time="600" data-side="black">10+0 Black</button>
+                </div>
+                <div class="action-buttons">
+                    <button id="btn-new-game" class="button"><span>New Game</span></button>
+                    <button id="btn-takeback" class="button"><span>Takeback</span></button>
+                    <button id="btn-flip" class="button"><span>Flip Board</span></button>
+                </div>
+            </div>
+            <div class="rmoves">
+                <div class="moves" id="move-list"></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.14.0/dist/ort.min.js"></script>
+
+    <script type="module">
+        import { Chessground } from 'https://unpkg.com/chessground@9.2.1/dist/chessground.min.js';
+        window.Chessground = Chessground;
+    </script>
+
+    <script src="js/config.js" defer></script>
+    <script src="js/ai.js" defer></script>
+    <script src="js/game.js" defer></script>
+    <script src="js/board.js" defer></script>
+    <script src="js/ui.js" defer></script>
+
+</body>
+
+</html>

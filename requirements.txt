@@ -1,0 +1,16 @@
+torch>=2.1.0
+torchvision
+numpy
+python-chess>=1.10.0
+h5py
+requests
+tqdm
+onnx>=1.15.0
+onnxruntime>=1.17.0
+mlflow
+pyyaml
+pandas
+stockfish
+tensorflow>=2.20.0
+pyyaml
+maia_chess_backend
