@@ -368,6 +368,16 @@ body {
     transition: background 0.15s;
 }
 
+.button-forfeit {
+    border: 1px solid #7a1c1c;
+    color: #c97a7a;
+}
+
+.button-forfeit:hover {
+    background: #3a1a1a;
+    color: #e08080;
+}
+
 /* PGN Export */
 .pgn-export {
     margin-top: 1rem;

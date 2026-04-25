@@ -99,9 +99,11 @@ class ChessGame {
 
         this.moveHistory.push(moveObj);
 
-        if (this.chess.in_check()) {
+        if (moveObj.san.includes('#')) {
+            // checkmate — notify fires below, skip check sound
+        } else if (moveObj.san.includes('+')) {
             this.playSound('check');
-        } else if (moveObj.captured || moveObj.flags.includes('c')) {
+        } else if (moveObj.captured) {
             this.playSound('capture');
         } else {
             this.playSound('move');
@@ -114,17 +116,17 @@ class ChessGame {
             let result;
             if (this.chess.in_checkmate()) {
                 result = `Checkmate! ${this.chess.turn() === 'w' ? 'Black' : 'White'} wins.`;
-            } else if (this.chess.in_draw()) {
-                result = 'Draw.';
             } else if (this.chess.in_stalemate()) {
                 result = 'Stalemate.';
             } else if (this.chess.in_threefold_repetition()) {
                 result = 'Draw by repetition.';
+            } else if (this.chess.in_draw()) {
+                result = 'Draw.';
             } else {
                 result = 'Game over.';
             }
 
-            if (this.onGameOver) this.onGameOver(result);
+            if (this.onGameOver) setTimeout(() => this.onGameOver(result), 800);
         }
 
         return moveObj;

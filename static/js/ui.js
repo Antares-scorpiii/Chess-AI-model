@@ -18,6 +18,7 @@ window.addEventListener('load', async () => {
     const btnNewGame = document.getElementById('btn-new-game');
     const btnTakeback = document.getElementById('btn-takeback');
     const btnFlip = document.getElementById('btn-flip');
+    const btnForfeit = document.getElementById('btn-forfeit');
     const showLegalMovesCheck = document.getElementById('show-legal-moves');
     const playSoundsCheck = document.getElementById('play-sounds');
     const autoQueenCheck = document.getElementById('auto-queen');
@@ -100,6 +101,8 @@ window.addEventListener('load', async () => {
         list.appendChild(gameItem);
         list.scrollTop = list.scrollHeight;
     }
+
+    let gameEnded = false;
 
     // Apply saved settings
     game.setTimeControl(settings.timeControl);
@@ -265,6 +268,7 @@ window.addEventListener('load', async () => {
     };
 
     game.onGameOver = (message) => {
+        gameEnded = true;
         // Determine winner and record result
         let result = 'draw';
         let dialogMessage = 'Draw! Play another?';
@@ -320,7 +324,7 @@ window.addEventListener('load', async () => {
     // Event handlers
     btnNewGame.addEventListener('click', () => {
         // Check if game is ongoing
-        if (game.chess.history().length > 0 && !game.chess.game_over()) {
+        if (game.chess.history().length > 0 && !game.chess.game_over() && !gameEnded) {
             if (!confirm('Game is currently ongoing. Do you want to quit this game?')) {
                 return;
             }
@@ -356,6 +360,7 @@ window.addEventListener('load', async () => {
         settings.playerSide = selectedControl.side;
         Config.save(settings);
 
+        gameEnded = false;
         game.reset();
         board.updateBoard();
         updateClocks();
@@ -379,6 +384,16 @@ window.addEventListener('load', async () => {
         board.flip();
     });
 
+    btnForfeit.addEventListener('click', () => {
+        if (game.chess.history().length === 0 || game.chess.game_over() || gameEnded) return;
+        game.stopClock();
+        gameEnded = true;
+        const winner = board.playerSide === 'white' ? 'Black' : 'White';
+        game.playSound('notify');
+        updateGameHistory('loss', board.playerSide, game.chess.pgn());
+        statusText.textContent = `You forfeited. ${winner} wins.`;
+    });
+
     timeButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             // Check if game is ongoing
@@ -393,6 +408,7 @@ window.addEventListener('load', async () => {
             timeButtons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
+            gameEnded = false;
             game.setTimeControl(time);
             game.reset();
             board.setPlayerSide(side);
