@@ -37,9 +37,6 @@
                     <label class="checkbox-label"><input type="checkbox" id="auto-queen" checked><span>Auto-promote to
                             Queen</span></label>
                 </div>
-                <div class="setting-row">
-                    <label class="checkbox-label"><input type="checkbox" id="theme-toggle"><span>Dark mode</span></label>
-                </div>
             </div>
         </div>
 
@@ -94,6 +91,12 @@
         import { Chessground } from 'https://unpkg.com/chessground@9.2.1/dist/chessground.min.js';
         window.Chessground = Chessground;
     </script>
+
+    <button id="theme-btn" aria-label="Toggle theme">
+        <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+    </button>
 
     <script src="js/config.js" defer></script>
     <script src="js/ai.js" defer></script>
