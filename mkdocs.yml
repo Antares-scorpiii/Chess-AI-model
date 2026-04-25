@@ -1,0 +1,41 @@
+site_name: Chess AI
+site_description: A personal chess AI trained on your own Lichess games
+repo_url: https://github.com/your-username/chess-ai
+
+theme:
+  name: material
+  palette:
+    - scheme: slate
+      primary: custom
+      accent: custom
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+
+extra_css:
+  - stylesheets/extra.css
+
+nav:
+  - Home: index.md
+  - Getting Started: setup.md
+  - Models:
+    - Behavioral Cloning: behavioral.md
+    - Maia Finetuning: maia.md
+  - Board Encoding: encoding.md
+  - Deployment:
+    - ONNX Export & Quantization: deployment.md
+    - Browser Inference: browser.md
+  - Frontend: frontend.md
+  - References: references.md
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - tables
